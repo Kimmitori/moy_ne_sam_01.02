@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Страница формирования заявки</title>
+    <link rel="stylesheet" type="text/css" href="/bootstrap.min.css">
+
+    <style>
+        main {
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            padding: 30px;
+        }
+
+        main>div {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+        }
+
+        table,
+        header {
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <main>
+        <div class="p-4 rounded-4 shadow">
+            <header>
+                <div>
+                    <h1 class="h3 mb-3 fw-normal">Список заявок пользователя</h1>
+                </div>
+            </header>
+            <table class="table">
+                <thead>
+                    <th>Адрес </th>
+                    <th>Контактные данные </th>
+                    <th>Вид услуги </th>
+                    <th>Время услуги </th>
+                    <th>Тип оплаты </th>
+                    <th>Статус </th>
+                  
+                </thead>
+                <tbody>
+                    {{#each orders}}
+                    <tr>
+                        <td>{{this.adres}}</td>
+                        <td>{{this.contact}}</td>
+                        <td>{{this.vid_usl}}</td>
+                        <td>{{this.time_usl}}</td>
+                        <td>{{this.pay}}</td>
+                        <td>{{this.status}}</td>
+                        
+                    </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+
+            <div class="d-flex justify-content-end gap-2 align-items-end">
+
+                <a id="btnCreate" href="/order/add" class="btn btn-primary">Создать заявку</a>
+
+            </div>
+        </div>
+    </main>
+    <script>
+        const listParams = window.location.pathname.split('/')
+        const token = listParams[listParams.length - 1]
+        const link = `/order/add/${token}`
+        const btnEl = document.getElementById("btnCreate")
+        btnEl.setAttribute('href', link)
+    </script>
+
+</body>
+
+
+</html>
